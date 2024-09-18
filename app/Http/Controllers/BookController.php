@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use Illuminate\Database\Eloquent\Casts\Json;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $books = Book::all();
+        return response()->json([
+            'status' => true,
+            'books' => $books,
+        ], 200);
     }
 
     /**
