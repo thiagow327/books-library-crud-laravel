@@ -40,10 +40,16 @@ class BookController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
-        //
+        return response()->json([
+            'status' => true,
+            'book' => Book::find($id),
+        ], 200);
     }
 
     /**
