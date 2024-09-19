@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Livros</h1>
-
+    <a href="{{ route('books.create') }}">Novo Livro</a>
     <table>
         <thead>
             <tr>
