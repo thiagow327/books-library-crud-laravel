@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Bibliotéca de Livros</h1>
+        <h1>Livros</h1>
         <a href="{{ route('books.create') }}" class="btn btn-primary">Novo Livro</a>
     </div>
 

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <h1>{{ $book->title }}</h1>
     <div class="card">
         <div class="card-body">
-            <h1 class="card-title">{{ $book->title }}</h1>
 
             <p><strong>Autor:</strong> {{ $book->author }}</p>
             <p><strong>ISBN:</strong> {{ $book->isbn }}</p>
