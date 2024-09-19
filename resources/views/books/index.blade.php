@@ -27,6 +27,7 @@
 
                     <td>
                         <a href="{{ route('books.show', $book->id) }}">Ver</a>
+                        <a href="{{ route('books.edit', $book->id) }}">Editar</a>
                         </form>
                     </td>
                 </tr>
