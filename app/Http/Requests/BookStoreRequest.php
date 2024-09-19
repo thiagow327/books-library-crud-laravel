@@ -24,7 +24,7 @@ class BookStoreRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
-            'isbn' => 'sometimes|required|string|max:255|unique:books,isbn,' . $this->route('book')->id,
+            'isbn' => 'sometimes|required|string|max:255',
             'quantity_pages' => 'required|integer',
             'edition' => 'required|string|max:255',
             'publisher' => 'required|string|max:255',
