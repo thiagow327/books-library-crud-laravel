@@ -10,13 +10,20 @@ use App\Models\Book;
 
 class BookController
 {
+    protected $book;
+
+    public function __construct(Book $book)
+    {
+        $this->book = $book;
+    }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Contracts\View\View
      */
     public function index(): View
     {
-        $books = Book::all();
+        $books = $this->book->all();
 
         return view('books.index', compact('books'));
     }
@@ -37,7 +44,7 @@ class BookController
      */
     public function store(BookStoreRequest $request): RedirectResponse
     {
-        Book::create($request->all());
+        $this->book->create($request->all());
 
         return redirect()->route('books.index');
     }
@@ -49,7 +56,7 @@ class BookController
      */
     public function show(string $id): View
     {
-        $book = Book::find($id);
+        $book = $this->book->find($id);
 
         return view('books.show', compact('book'));
     }
@@ -61,7 +68,7 @@ class BookController
      */
     public function edit(string $id): View
     {
-        $book = Book::find($id);
+        $book = $this->book->find($id);
 
         return view('books.edit', compact('book'));
     }
@@ -74,7 +81,7 @@ class BookController
      */
     public function update(BookWebUpdateRequest $request, string $id): RedirectResponse
     {
-        $book = Book::find($id);
+        $book = $this->book->find($id);
         $book->update($request->all());
 
         return redirect()->route('books.index');
@@ -87,7 +94,7 @@ class BookController
      */
     public function destroy(string $id): RedirectResponse
     {
-        $book = Book::find($id);
+        $book = $this->book->find($id);
         $book->delete();
 
         return redirect()->route('books.index');

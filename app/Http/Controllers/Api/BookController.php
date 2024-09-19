@@ -4,20 +4,26 @@ namespace App\Http\Controllers\Api;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\BookUpdateRequest;
 use App\Http\Requests\BookStoreRequest;
 use App\Models\Book;
 
 class BookController
 {
+    protected $book;
+
+    public function __construct(Book $book)
+    {
+        $this->book = $book;
+    }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(): JsonResponse
     {
-        $books = Book::all();
+        $books = $this->book->all();
         return response()->json([
             'status' => true,
             'books' => $books,
@@ -32,7 +38,7 @@ class BookController
     public function store(BookStoreRequest $request): JsonResponse
     {
         try {
-            $book = Book::create($request->validated());
+            $book = $this->book->create($request->validated());
 
             return response()->json([
                 'status' => true,
@@ -56,6 +62,13 @@ class BookController
      */
     public function show(string $id): JsonResponse
     {
+        if ($this->book->find($id)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Book not found',
+            ], 404);
+        }
+
         return response()->json([
             'status' => true,
             'book' => Book::find($id),
@@ -65,13 +78,12 @@ class BookController
     /**
      * Update the specified resource in storage.
      * @param \Illuminate\Http\Request\BookUpdateRequest $request
-     * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(BookUpdateRequest $request, Book $book): JsonResponse
+    public function update(BookUpdateRequest $request): JsonResponse
     {
         try {
-            $book->update($request->validated());
+            $book = $this->book->update($request->validated());
 
             return response()->json([
                 'status' => true,
@@ -94,7 +106,7 @@ class BookController
      */
     public function destroy(string $id): JsonResponse
     {
-        $book = Book::find($id);
+        $book = $this->book->find($id);
 
         if (!$book) {
             return response()->json([
