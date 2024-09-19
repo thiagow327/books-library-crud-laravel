@@ -35,8 +35,10 @@ class BookController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param \App\Http\Requests\BookStoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(BookStoreRequest $request)
+    public function store(BookStoreRequest $request): JsonResponse
     {
         DB::beginTransaction();
 
