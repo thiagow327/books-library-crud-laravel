@@ -82,10 +82,10 @@ class BookController
      * @param \Illuminate\Http\Request\BookUpdateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(BookUpdateRequest $request): JsonResponse
+    public function update(Book $book, BookUpdateRequest $request): JsonResponse
     {
         try {
-            $book = $this->book->update($request->validated());
+            $book = $book->update($request->validated());
 
             return response()->json([
                 'status' => true,
