@@ -28,6 +28,10 @@
                     <td>
                         <a href="{{ route('books.show', $book->id) }}">Ver</a>
                         <a href="{{ route('books.edit', $book->id) }}">Editar</a>
+                        <form action="{{ route('books.destroy', $book->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Excluir</button>
                         </form>
                     </td>
                 </tr>
