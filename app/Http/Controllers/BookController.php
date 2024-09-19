@@ -23,7 +23,7 @@ class BookController
      */
     public function index(): View
     {
-        $books = $this->book->paginate(4);
+        $books = $this->book->all();
 
         return view('books.index', compact('books'));
     }
