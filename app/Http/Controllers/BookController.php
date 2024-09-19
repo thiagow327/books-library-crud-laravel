@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookUpdateRequest;
 use App\Http\Requests\BookStoreRequest;
 use App\Models\Book;
 use Exception;
@@ -86,10 +87,32 @@ class BookController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param \Illuminate\Http\Request\BookUpdateRequest $request
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(BookUpdateRequest $request, Book $book): JsonResponse
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $book->update($request->validated());
+
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'book' => $book,
+                'message' => 'Book updated successfully',
+            ], 200);
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage(),
+            ], 400);
+        }
     }
 
     /**
