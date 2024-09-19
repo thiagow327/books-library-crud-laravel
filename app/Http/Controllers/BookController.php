@@ -2,127 +2,101 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BookUpdateRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BookStoreRequest;
+use App\Http\Requests\BookWebUpdateRequest;
 use App\Models\Book;
-use Exception;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 
-class BookController extends Controller
+class BookController
 {
+    protected $book;
+
+    public function __construct(Book $book)
+    {
+        $this->book = $book;
+    }
+
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\View\View
      */
-    public function index(): JsonResponse
+    public function index(): View
     {
-        $books = Book::all();
-        return response()->json([
-            'status' => true,
-            'books' => $books,
-        ], 200);
+        $books = $this->book->all();
+
+        return view('books.index', compact('books'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function create(): View
+    {
+        return view('books.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param \App\Http\Requests\BookStoreRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param BookStoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(BookStoreRequest $request): JsonResponse
+    public function store(BookStoreRequest $request): RedirectResponse
     {
-        DB::beginTransaction();
+        $this->book->create($request->all());
 
-        try {
-            $book = Book::create($request->validated());
-
-            DB::commit();
-
-            return response()->json([
-                'status' => true,
-                'book' => $book,
-                'message' => 'Book created successfully',
-            ], 201);
-        } catch (Exception $exception) {
-            DB::rollBack();
-
-            return response()->json([
-                'status' => false,
-                'message' => $exception->getMessage(),
-            ], 400);
-        }
+        return redirect()->route('books.index');
     }
 
     /**
      * Display the specified resource.
-     * 
      * @param string $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\View\View
      */
-    public function show(string $id): JsonResponse
+    public function show(string $id): View
     {
-        return response()->json([
-            'status' => true,
-            'book' => Book::find($id),
-        ], 200);
+        $book = $this->book->find($id);
+
+        return view('books.show', compact('book'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * @param string $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function edit(string $id): View
+    {
+        $book = $this->book->find($id);
+
+        return view('books.edit', compact('book'));
     }
 
     /**
      * Update the specified resource in storage.
-     * @param \Illuminate\Http\Request\BookUpdateRequest $request
+     * @param BookWebUpdateRequest $request
      * @param string $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(BookUpdateRequest $request, Book $book): JsonResponse
+    public function update(BookWebUpdateRequest $request, string $id): RedirectResponse
     {
-        DB::beginTransaction();
+        $book = $this->book->find($id);
+        $book->update($request->all());
 
-        try {
-            $book->update($request->validated());
-
-            DB::commit();
-
-            return response()->json([
-                'status' => true,
-                'book' => $book,
-                'message' => 'Book updated successfully',
-            ], 200);
-        } catch (Exception $exception) {
-            DB::rollBack();
-
-            return response()->json([
-                'status' => false,
-                'message' => $exception->getMessage(),
-            ], 400);
-        }
+        return redirect()->route('books.index');
     }
 
     /**
      * Remove the specified resource from storage.
      * @param string $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy(string $id): RedirectResponse
     {
-        DB::beginTransaction();
+        $book = $this->book->find($id);
+        $book->delete();
 
-        try {
-            $book = Book::find($id);
-            $book->delete();
-
-            DB::commit();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Book deleted successfully',
-            ], 200);
-        } catch (Exception $exception) {
-            DB::rollBack();
-
-            return response()->json([
-                'status' => false,
-                'message' => $exception->getMessage(),
-            ], 400);
-        }
+        return redirect()->route('books.index');
     }
 }
