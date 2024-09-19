@@ -14,7 +14,7 @@ class BookWebController extends Controller
     public function index()
     {
         $books = Book::all();
-        
+
         return view('books.index', compact('books'));
     }
 
@@ -23,7 +23,7 @@ class BookWebController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -31,7 +31,9 @@ class BookWebController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Book::create($request->all());
+
+        return redirect()->route('books.index');
     }
 
     /**
