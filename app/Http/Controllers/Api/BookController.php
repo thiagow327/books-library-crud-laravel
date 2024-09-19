@@ -95,7 +95,14 @@ class BookController
     public function destroy(string $id): JsonResponse
     {
         $book = Book::find($id);
-        
+
+        if (!$book) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Book not found',
+            ], 404);
+        }
+
         try {
             $book->delete();;
 
