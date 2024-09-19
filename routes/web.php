@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookWebController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('book', BookWebController::class)->only([
+    'index',
+    'show',
+    'store',
+    'update',
+    'destroy'
+]);
