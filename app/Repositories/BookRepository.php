@@ -3,8 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Book;
+use App\Contracts\BookRepositoryInterface;
 
-class BookRepository
+class BookRepository implements BookRepositoryInterface
 {
     protected $book;
 

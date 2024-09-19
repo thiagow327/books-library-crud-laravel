@@ -33,6 +33,10 @@ This is a simple book library application that allows users to view, add, edit, 
    ```
     docker-compose up
    ```
+4. Suba os seeds
+   ```
+    docker-compose exec app php artisan db:seed
+   ```
 
 ## Usage API
 

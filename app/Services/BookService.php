@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Repositories\BookRepository;
+use App\Contracts\BookRepositoryInterface;
 
 class BookService
 {
     protected $repository;
 
-    public function __construct(BookRepository $repository)
+    public function __construct(BookRepositoryInterface $bookRepository)
     {
-        $this->repository = $repository;
+        $this->repository = $bookRepository;
     }
 
     public function store($data)

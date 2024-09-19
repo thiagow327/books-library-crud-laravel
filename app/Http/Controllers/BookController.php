@@ -54,25 +54,19 @@ class BookController
 
     /**
      * Display the specified resource.
-     * @param string $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(string $id): View
+    public function show(Book $book): View
     {
-        $book = $this->book->find($id);
-
         return view('books.show', compact('book'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param string $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(string $id): View
+    public function edit(Book $book): View
     {
-        $book = $this->book->find($id);
-
         return view('books.edit', compact('book'));
     }
 
@@ -92,12 +86,10 @@ class BookController
 
     /**
      * Remove the specified resource from storage.
-     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Book $book): RedirectResponse
     {
-        $book = $this->book->find($id);
         $book->delete();
 
         return redirect()->route('books.index');
