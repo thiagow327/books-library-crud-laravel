@@ -62,7 +62,9 @@ class BookController
      */
     public function show(string $id): JsonResponse
     {
-        if ($this->book->find($id)) {
+        $book = $this->book->find($id);
+
+        if (!$book) {
             return response()->json([
                 'status' => false,
                 'message' => 'Book not found',
