@@ -62,7 +62,9 @@ class BookController
      */
     public function show(string $id): JsonResponse
     {
-        if ($this->book->find($id)) {
+        $book = $this->book->find($id);
+
+        if (!$book) {
             return response()->json([
                 'status' => false,
                 'message' => 'Book not found',
@@ -80,10 +82,10 @@ class BookController
      * @param \Illuminate\Http\Request\BookUpdateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(BookUpdateRequest $request): JsonResponse
+    public function update(Book $book, BookUpdateRequest $request): JsonResponse
     {
         try {
-            $book = $this->book->update($request->validated());
+            $book = $book->update($request->validated());
 
             return response()->json([
                 'status' => true,

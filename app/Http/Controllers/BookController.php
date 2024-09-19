@@ -7,14 +7,17 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BookStoreRequest;
 use App\Http\Requests\BookWebUpdateRequest;
 use App\Models\Book;
+use App\Services\BookService;
 
 class BookController
 {
     protected $book;
+    protected $service;
 
-    public function __construct(Book $book)
+    public function __construct(Book $book, BookService $bookService)
     {
         $this->book = $book;
+        $this->service = $bookService;
     }
 
     /**
@@ -44,7 +47,7 @@ class BookController
      */
     public function store(BookStoreRequest $request): RedirectResponse
     {
-        $this->book->create($request->all());
+        $this->service->store($request->all());
 
         return redirect()->route('books.index');
     }
