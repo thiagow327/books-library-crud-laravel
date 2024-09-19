@@ -1,6 +1,6 @@
 # Books Library
 
-## Description PT-BR
+## Descrição PT-BR
 
 Esta é uma aplicação simples de biblioteca de livros que permite aos usuários adicionar, editar e excluir livros de uma lista. Devido a limitações de tempo, não foi possível implementar os padrões de service, repository e repository interface em todos os métodos. No entanto, apliquei-os no método `store` do controlador `bookController` para demonstrar meu conhecimento sobre esses conceitos.
 
@@ -29,7 +29,10 @@ This is a simple book library application that allows users to add, edit, and de
 
 1. Clone the repository
 2. Access the project directory
-3. docker-compose up
+3. Suba do container
+   ```
+    docker-compose up
+   ```
 
 ## Usage API
 
