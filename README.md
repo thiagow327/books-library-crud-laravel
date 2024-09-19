@@ -59,3 +59,18 @@ This is a simple book library application that allows users to add, edit, and de
 
 1. Access the web interface at http://localhost:80/books
 2. Use the web interface to add, edit, and delete books from the list.
+
+## Images API
+
+![index-api.png](public/images/api/index-api.png)
+![show-api.png](public/images/api/show-api.png)
+![store-api.png](public/images/api/store-api.png)
+![update-api.png](public/images/api/update-api.png)
+![destroy-api.png](public/images/api/destroy-api.png)
+
+## Images WEB
+
+![index.png](public/images/web/index.png)
+![show.png](public/images/web/show.png)
+![edit.png](public/images/web/edit.png)
+![store.png](public/images/web/store.png)
