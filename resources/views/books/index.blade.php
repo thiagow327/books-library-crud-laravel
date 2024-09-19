@@ -12,6 +12,7 @@
                 <th>Páginas</th>
                 <th>Edição</th>
                 <th>Editora</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,11 @@
                     <td>{{ $book->pages }}</td>
                     <td>{{ $book->edition }}</td>
                     <td>{{ $book->publisher }}</td>
+
+                    <td>
+                        <a href="{{ route('books.show', $book->id) }}">Ver</a>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
     </table>
