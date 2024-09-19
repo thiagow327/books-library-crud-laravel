@@ -94,20 +94,16 @@ class BookController
      */
     public function destroy(string $id): JsonResponse
     {
-        DB::beginTransaction();
-
+        $book = Book::find($id);
+        
         try {
-            $book = Book::find($id);
-            $book->delete();
-
-            DB::commit();
+            $book->delete();;
 
             return response()->json([
                 'status' => true,
                 'message' => 'Book deleted successfully',
             ], 200);
         } catch (Exception $exception) {
-            DB::rollBack();
 
             return response()->json([
                 'status' => false,
