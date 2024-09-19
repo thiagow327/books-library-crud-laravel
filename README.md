@@ -11,6 +11,7 @@ This is a simple book library application that allows users to add, edit, and de
 * MySQL 8.0
 * Docker
 * Composer
+* Bootstrap CSS
 
 ## Features
 
