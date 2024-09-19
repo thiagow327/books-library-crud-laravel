@@ -70,12 +70,8 @@ class BookController
      */
     public function update(BookUpdateRequest $request, Book $book): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             $book->update($request->validated());
-
-            DB::commit();
 
             return response()->json([
                 'status' => true,
@@ -83,7 +79,6 @@ class BookController
                 'message' => 'Book updated successfully',
             ], 200);
         } catch (Exception $exception) {
-            DB::rollBack();
 
             return response()->json([
                 'status' => false,
