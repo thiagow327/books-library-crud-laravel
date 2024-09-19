@@ -1,8 +1,12 @@
 # Books Library
 
-## Description
+## Description PT-BR
 
-This is a simple book library application that allows users to add, edit, and delete books from a list.
+Esta é uma aplicação simples de biblioteca de livros que permite aos usuários adicionar, editar e excluir livros de uma lista. Devido a limitações de tempo, não foi possível implementar os padrões de service, repository e repository interface em todos os métodos. No entanto, apliquei-os no método `store` do controlador `bookController` para demonstrar meu conhecimento sobre esses conceitos.
+
+## Description EN
+
+This is a simple book library application that allows users to add, edit, and delete books from a list. Due to time constraints, it was not possible to implement the service, repository, and repository interface patterns in all methods. However, I applied them in the `store` method of the `BookController` to demonstrate my knowledge of these concepts.
 
 ## Technologies
 
@@ -43,7 +47,7 @@ This is a simple book library application that allows users to add, edit, and de
         "title": "Mastering PHP",
         "author": "John Doe",
         "isbn": "9780987654343",
-        "quantity_pages": 350,
+        "quantity_pages": 200,
         "edition": "1st Edition",
         "publisher": "Code Press"
     }
@@ -53,5 +57,5 @@ This is a simple book library application that allows users to add, edit, and de
 
 ## Usage WEB
 
-1. Access the web interface at http://localhost:80
+1. Access the web interface at http://localhost:80/books
 2. Use the web interface to add, edit, and delete books from the list.
