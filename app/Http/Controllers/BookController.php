@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookStoreRequest;
 use App\Models\Book;
+use Exception;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -33,9 +36,28 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookStoreRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $book = Book::create($request->validated());
+
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'book' => $book,
+                'message' => 'Book created successfully',
+            ], 201);
+        } catch (Exception $exception) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage(),
+            ], 400);
+        }
     }
 
     /**
