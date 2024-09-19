@@ -21,7 +21,7 @@
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author }}</td>
                     <td>{{ $book->isbn }}</td>
-                    <td>{{ $book->pages }}</td>
+                    <td>{{ $book->quantity_pages }}</td>
                     <td>{{ $book->edition }}</td>
                     <td>{{ $book->publisher }}</td>
 
