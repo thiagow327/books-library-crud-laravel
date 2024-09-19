@@ -6,9 +6,7 @@ use App\Http\Requests\BookUpdateRequest;
 use App\Http\Requests\BookStoreRequest;
 use App\Models\Book;
 use Exception;
-use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -24,14 +22,6 @@ class BookController extends Controller
             'status' => true,
             'books' => $books,
         ], 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -75,14 +65,6 @@ class BookController extends Controller
             'status' => true,
             'book' => Book::find($id),
         ], 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
