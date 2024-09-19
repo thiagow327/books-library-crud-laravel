@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\BookStoreRequest;
 use App\Http\Requests\BookWebUpdateRequest;
 use App\Models\Book;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class BookController
 {

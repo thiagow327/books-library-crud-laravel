@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\BookUpdateRequest;
-use App\Http\Requests\BookStoreRequest;
-use App\Models\Book;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\BookUpdateRequest;
+use App\Http\Requests\BookStoreRequest;
+use App\Models\Book;
 
 class BookController
 {
