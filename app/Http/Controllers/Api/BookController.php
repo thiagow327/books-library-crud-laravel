@@ -31,12 +31,8 @@ class BookController
      */
     public function store(BookStoreRequest $request): JsonResponse
     {
-        DB::beginTransaction();
-
         try {
             $book = Book::create($request->validated());
-
-            DB::commit();
 
             return response()->json([
                 'status' => true,
@@ -44,7 +40,6 @@ class BookController
                 'message' => 'Book created successfully',
             ], 201);
         } catch (Exception $exception) {
-            DB::rollBack();
 
             return response()->json([
                 'status' => false,
