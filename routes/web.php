@@ -1,6 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookWebController;
+use App\Http\Controllers\BookController;
 
-Route::resource('books', BookWebController::class);
+Route::resource('books', BookController::class);
