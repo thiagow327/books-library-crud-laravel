@@ -6,7 +6,6 @@
         <a href="{{ route('books.create') }}" class="btn btn-primary">Novo Livro</a>
     </div>
 
-
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
